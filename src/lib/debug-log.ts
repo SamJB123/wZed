@@ -11,12 +11,7 @@ export function debugLog(payload: DebugPayload) {
   }
 
   // #region agent log
-  const runtimeImport = new Function(
-    "specifier",
-    "return import(specifier)",
-  ) as (specifier: string) => Promise<typeof import("node:fs")>;
-
-  void runtimeImport("node:fs")
+  void import("node:fs")
     .then(({ appendFileSync }) => {
       appendFileSync(
         "/opt/cursor/logs/debug.log",
