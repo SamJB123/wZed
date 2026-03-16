@@ -5,7 +5,6 @@ import { debugLog } from "@/lib/debug-log";
 const WzedApp = lazy(() => import("@/components/WzedApp"));
 
 export const Route = createFileRoute("/")({
-  ssr: false,
   component: IndexRoute,
 });
 
@@ -17,7 +16,7 @@ function IndexRoute() {
     message: "Rendering index route",
     data: {
       hasWindow: typeof window !== "undefined",
-      routeSsr: false,
+      routeSsr: true,
       usesClientOnly: true,
     },
   });
