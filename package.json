@@ -6,7 +6,7 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "start": "vite preview",
-    "lint": "eslint .",
+    "lint": "eslint src vite.config.ts eslint.config.mjs",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler deploy",
     "cf-typegen": "wrangler types"
@@ -34,6 +34,7 @@
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^9",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^17.4.0",
     "tailwindcss": "^4",
