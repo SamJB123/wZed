@@ -5,7 +5,6 @@ import {
   createRootRoute,
 } from "@tanstack/react-router";
 import "@/app/globals.css";
-import { debugLog } from "@/lib/debug-log";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -31,18 +30,6 @@ export const Route = createRootRoute({
 });
 
 function RootDocument() {
-  // #region agent log
-  debugLog({
-    hypothesisId: "D",
-    location: "src/routes/__root.tsx:RootDocument",
-    message: "Rendering root document",
-    data: {
-      hasWindow: typeof window !== "undefined",
-      bodyClassName: "antialiased",
-    },
-  });
-  // #endregion
-
   return (
     <html lang="en" className="dark">
       <head>
