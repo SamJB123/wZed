@@ -7,7 +7,8 @@ A [Zed](https://zed.dev)-inspired playground for [Nodepod](https://github.com/Sc
 > **Disclaimer:** wZed is not affiliated with [Zed Industries](https://zed.dev). This is an independent playground with a Zed-inspired design, built as a frontend for [Nodepod](https://github.com/ScelarOrg/Nodepod).
 
 ![React](https://img.shields.io/badge/React-19.2-blue)
-![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![TanStack Start](https://img.shields.io/badge/TanStack_Start-1-0f172a)
+![Cloudflare Workers](https://img.shields.io/badge/Cloudflare_Workers-orange)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
 ![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8)
 ![License](https://img.shields.io/badge/License-MIT-green)
@@ -67,7 +68,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-> **Note:** SharedArrayBuffer is required for the nodepod runtime. The Next.js config sets the necessary COEP/COOP headers automatically.
+> **Note:** SharedArrayBuffer is required for the nodepod runtime. TanStack Start applies the necessary COOP/COEP headers through request middleware so the app stays cross-origin isolated in local dev and on Cloudflare Workers.
 
 ### Git integration
 
@@ -77,9 +78,12 @@ To use push/pull with GitHub, set a personal access token in **Settings > Git > 
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Start Next.js dev server (localhost:3000) |
-| `npm run build` | Production build (static export) |
-| `npm run start` | Serve production build |
+| `npm run dev` | Start the TanStack Start dev server on localhost:3000 |
+| `npm run build` | Build the TanStack Start app for Cloudflare Workers |
+| `npm run start` | Preview the production build locally |
+| `npm run preview` | Preview the production build locally |
+| `npm run deploy` | Build and deploy to Cloudflare Workers |
+| `npm run cf-typegen` | Refresh Wrangler-generated types |
 | `npm run lint` | Run ESLint |
 
 ## Project Structure
@@ -87,9 +91,12 @@ To use push/pull with GitHub, set a personal access token in **Settings > Git > 
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Root layout, theme setup
-│   └── page.tsx                # Main application shell
+│   └── globals.css             # Global Tailwind and theme tokens
+├── routes/
+│   ├── __root.tsx              # Root document shell and metadata
+│   └── index.tsx               # Browser-only index route
 ├── components/
+│   ├── WzedApp.tsx             # Main application shell
 │   ├── TitleBar.tsx            # Menu bar and panel toggles
 │   ├── EditorPane.tsx          # Split pane layout and drag-drop
 │   ├── CodeEditor.tsx          # Monaco editor integration
@@ -115,20 +122,23 @@ src/
 │   ├── themes.ts               # Color theme definitions
 │   ├── keybind-dispatcher.ts   # Global keybinding handler
 │   └── mock-data.ts            # Language detection, types
-└── hooks/
-    └── use-resizable.ts        # Resize drag handler
+├── hooks/
+│   └── use-resizable.ts        # Resize drag handler
+├── router.tsx                  # TanStack Router bootstrap
+└── start.ts                    # TanStack Start middleware/config
 ```
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| Framework | [Next.js 16](https://nextjs.org) (static export) |
+| Framework | [TanStack Start](https://tanstack.com/start) |
 | UI | [React 19](https://react.dev), [Tailwind CSS 4](https://tailwindcss.com) |
 | State | [Zustand 5](https://zustand.docs.pmnd.rs) |
 | Code Editor | [Monaco Editor](https://microsoft.github.io/monaco-editor/) |
 | Terminal | [xterm.js](https://xtermjs.org) |
 | Runtime | [Nodepod](https://github.com/ScelarOrg/Nodepod) — browser-native Node.js (VFS, npm, shell, workers) |
+| Hosting | [Cloudflare Workers](https://developers.cloudflare.com/workers/) |
 | Icons | [Lucide React](https://lucide.dev) |
 
 ## How It Works

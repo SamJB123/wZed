@@ -16,7 +16,7 @@ import { ResizeHandle } from "@/components/ui/ResizeHandle";
 import { HomeScreen } from "@/components/HomeScreen";
 import { LoadingOverlay } from "@/components/ui/LoadingOverlay";
 
-export default function ZedClone() {
+export default function WzedApp() {
   const leftDock = useWorkspaceStore((s) => s.leftDock);
   const rightDock = useWorkspaceStore((s) => s.rightDock);
   const bottomDock = useWorkspaceStore((s) => s.bottomDock);
