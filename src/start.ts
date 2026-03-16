@@ -1,4 +1,5 @@
 import { createMiddleware, createStart } from "@tanstack/react-start";
+import { debugLog } from "@/lib/debug-log";
 
 const crossOriginIsolationMiddleware = createMiddleware({
   type: "request",
@@ -15,6 +16,20 @@ const crossOriginIsolationMiddleware = createMiddleware({
 });
 
 export const startInstance = createStart(() => ({
+  // #region agent log
+  ...(() => {
+    debugLog({
+      hypothesisId: "A",
+      location: "src/start.ts:createStart",
+      message: "Resolving start options",
+      data: {
+        defaultSsr: false,
+        requestMiddlewareCount: 1,
+      },
+    });
+    return {};
+  })(),
+  // #endregion
   defaultSsr: false,
   requestMiddleware: [crossOriginIsolationMiddleware],
 }));
