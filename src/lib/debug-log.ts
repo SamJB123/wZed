@@ -11,16 +11,11 @@ export function debugLog(payload: DebugPayload) {
   }
 
   // #region agent log
-  void import("node:fs")
-    .then(({ appendFileSync }) => {
-      appendFileSync(
-        "/opt/cursor/logs/debug.log",
-        JSON.stringify({
-          ...payload,
-          timestamp: Date.now(),
-        }) + "\n",
-      );
-    })
-    .catch(() => {});
+  console.log(
+    JSON.stringify({
+      ...payload,
+      timestamp: Date.now(),
+    }),
+  );
   // #endregion
 }
