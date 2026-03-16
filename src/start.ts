@@ -23,13 +23,13 @@ export const startInstance = createStart(() => ({
       location: "src/start.ts:createStart",
       message: "Resolving start options",
       data: {
-        defaultSsr: false,
+        defaultSsr: true,
         requestMiddlewareCount: 1,
       },
     });
     return {};
   })(),
   // #endregion
-  defaultSsr: false,
+  defaultSsr: true,
   requestMiddleware: [crossOriginIsolationMiddleware],
 }));
